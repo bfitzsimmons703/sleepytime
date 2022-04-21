@@ -15,3 +15,7 @@ CD into the directoy and run `cargo run`
 
 ### With Docker:
 Run `docker-compose up --build`
+
+---
+## How to use
+Send a get request to localhost:8080/sleep/{ms} where {ms} is the number of milliseconds you want the request to hang for
