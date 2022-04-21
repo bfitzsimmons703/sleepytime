@@ -1,0 +1,7 @@
+version: '3' # version of docker-compose
+services:
+  sleepytime:
+    restart: always 
+    build: . #look in current directory for a Dockerfile to build this container
+    ports:
+      - "8080:8080"
