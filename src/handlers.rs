@@ -1,15 +1,32 @@
 use std::time::Duration;
-
-use actix_web::{get, web, HttpResponse};
+use actix_web::{get, HttpRequest, HttpResponse};
 use tokio::time;
 
+const MAX_MILLIS: u64 = 15000;
+
 #[get("/sleep/{ms}")]
-pub async fn sleep(path: web::Path<u64>) -> HttpResponse {
-    let millis = path.into_inner();
-    
-    if millis > 15000 {
-        return HttpResponse::BadRequest().body("ms must be 0 - 15000");
-    }
+pub async fn sleep(req: HttpRequest) -> HttpResponse {
+    let bad_request = HttpResponse::BadRequest().body("Please provide a valid millisecond count 0 - 15000");
+
+    let millis = match req.match_info().get("ms") {
+        Some(ms) => match ms.parse() {
+            Ok(ms) => {
+                if ms > MAX_MILLIS {
+                    return bad_request;
+                }
+
+                //can already assume >= 0 if we were able to parse as an unsigned int
+
+                ms
+            },
+            _ => {
+                return bad_request;
+            }
+        },
+        None => {
+            return not_found().await;
+        }
+    };
 
     time::sleep(Duration::from_millis(millis)).await; //non-blocking
     HttpResponse::Ok().finish()
