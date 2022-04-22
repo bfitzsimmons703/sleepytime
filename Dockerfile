@@ -23,8 +23,24 @@ RUN cargo build --release
 # The final base image
 FROM debian:buster-slim
 
+ARG APP=/usr/src/app
+ARG PORT=80
+
+ENV PORT=${PORT} \
+    APP_USER=sleepytime
+
+RUN groupadd $APP_USER \
+    && useradd -g $APP_USER $APP_USER \
+    && mkdir -p ${APP}
+
 # Copy from the previous build
-COPY --from=build /sleepytime/target/release/sleepytime /usr/src/sleepytime
+COPY --from=build /sleepytime/target/release/sleepytime ${APP}/sleepytime
+
+# Make sure our app user has the right permissions
+RUN chown -R $APP_USER:$APP_USER ${APP}
+
+USER $APP_USER
+WORKDIR ${APP}
 
 # Run the binary
-CMD ["/usr/src/sleepytime"]
+CMD ["./sleepytime"]
