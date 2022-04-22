@@ -1,4 +1,4 @@
-## Sleepytime.rs
+## [Sleepytime.rs](https://sleepytime-e6hrf74aya-uw.a.run.app)
 ### A simple API to simulate slow network requests.
 
 
@@ -7,7 +7,8 @@ I often need something like this when developing personal projects. And it's a p
 Plus, it was a fun opportunity to learn some Rust.
 
 ---
-## How to build
+## How to build locally
+If you don't want to use the public endpoint linked above, you can build and use sleepytime locally.
 
 ### With Rust:
 Make sure you have rust and cargo installed. This uses rust 1.60.
@@ -17,5 +18,5 @@ CD into the directoy and run `cargo run`
 Run `docker-compose up --build`
 
 ---
-## How to use
+## How to use locally
 Send a get request to localhost:8080/sleep/{ms} where {ms} is the number of milliseconds you want the request to hang for
