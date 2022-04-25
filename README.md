@@ -1,4 +1,4 @@
-## [Sleepytime.rs](https://sleepytime-e6hrf74aya-uw.a.run.app/sleep/100)
+## Sleepytime.rs
 ### A simple API to simulate slow network requests.
 
 
