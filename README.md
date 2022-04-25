@@ -1,4 +1,4 @@
-## Sleepytime.rs
+## [Sleepytime.rs](https://sleepytime-rs.onrender.com/sleep/100)
 ### A simple API to simulate slow network requests.
 
 
