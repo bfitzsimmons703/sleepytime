@@ -24,10 +24,8 @@ RUN cargo build --release
 FROM debian:buster-slim
 
 ARG APP=/usr/src/app
-ARG PORT=80
 
-ENV PORT=${PORT} \
-    APP_USER=sleepytime
+ENV APP_USER=sleepytime
 
 RUN groupadd $APP_USER \
     && useradd -g $APP_USER $APP_USER \
